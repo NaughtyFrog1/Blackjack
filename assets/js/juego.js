@@ -17,6 +17,8 @@ const btnPedir = document.querySelector('#btnPedir');
 const btnDetener = document.querySelector('#btnDetener');
 const puntosHtml = document.querySelectorAll('small');
 const cartasJugador = document.querySelector('#jugador-cartas');
+const cartasPC = document.querySelector('#computadora-cartas');
+
 
 
 // Crea y mezcla una nuevo mazo de cartas
@@ -52,6 +54,24 @@ const valorCarta = (carta) => {
     : parseInt(valor);
 }
 
+const turnoComputadora = (puntosMinimos) => {
+  if (puntosMinimos > 21) puntosMinimos = 0;
+
+  do {
+    const carta = pedirCarta();
+
+    puntosPC += valorCarta(carta);
+    puntosHtml[1].innerText = puntosPC;
+
+    const imgCarta = document.createElement('img');
+    imgCarta.classList.add('carta');
+    imgCarta.src = `assets/cartas/${carta}.png`;
+    imgCarta.alt = `Carta ${carta}`;
+    cartasPC.appendChild(imgCarta);
+    console.log(puntosPC);
+  } while (puntosPC < puntosMinimos);
+}
+
 
 //* Eventos
 
@@ -69,9 +89,11 @@ btnPedir.addEventListener('click', (e) => {
 
   if (puntosJugador > 21) {
     btnPedir.disabled = true;
+    turnoComputadora(puntosJugador);
   } else if (puntosJugador === 21) {
-    console.warn('Blackjack!');
     btnPedir.disabled = true;
+    turnoComputadora(puntosJugador);
+    console.warn('Blackjack!');
   }
 });
 
