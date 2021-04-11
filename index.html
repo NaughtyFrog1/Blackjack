@@ -6,10 +6,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blackjack</title>
 
+  <link 
+    rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+  >
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+  <header class="site-header">
+    <h1 class="site-header__titulo">Blackjack</h1>
+  </header>
   
+  <div class="row container-fluid mt-4">
+    <div class="col text-center p0">
+      <button class="btn btn-danger mx-1">Nuevo Juego</button>
+      <button class="btn btn-primary mx-1">Pedir Carta</button>
+      <button class="btn btn-primary mx-1">Detener</button>
+    </div>
+  </div>
+
+  <div class="row container">
+    <div class="col">
+      <h2>Jugador 1 - <small>0</small></h2>
+      <div id="jugador-cartas">
+        <img class="carta" src="assets/cartas/2C.png" alt="carta">
+        <img class="carta" src="assets/cartas/2C.png" alt="carta">
+        <img class="carta" src="assets/cartas/2C.png" alt="carta">
+        <img class="carta" src="assets/cartas/2C.png" alt="carta">
+      </div>
+    </div>
+  </div>
+
+  <div class="row container">
+    <div class="col">
+      <h2>Computadora - <small>0</small></h2>
+      <div id="computadora-cartas">
+        <img class="carta" src="assets/cartas/JC.png" alt="carta">
+        <img class="carta" src="assets/cartas/JC.png" alt="carta">
+        <img class="carta" src="assets/cartas/JC.png" alt="carta">
+        <img class="carta" src="assets/cartas/JC.png" alt="carta">
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/juego.js"></script>
 </body>
 </html>
