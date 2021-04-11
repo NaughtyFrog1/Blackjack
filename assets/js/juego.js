@@ -72,10 +72,15 @@ const turnoComputadora = (puntosMinimos) => {
   } while (puntosPC < puntosMinimos);
 }
 
+const finTurnoJugador = (puntos) => {
+  btnPedir.disabled = true;
+  btnDetener.disabled = true;
+  turnoComputadora(puntos);
+}
 
 //* Eventos
 
-btnPedir.addEventListener('click', (e) => {
+btnPedir.addEventListener('click', () => {
   const carta = pedirCarta();
 
   puntosJugador += valorCarta(carta);
@@ -88,13 +93,15 @@ btnPedir.addEventListener('click', (e) => {
   cartasJugador.appendChild(imgCarta);
 
   if (puntosJugador > 21) {
-    btnPedir.disabled = true;
-    turnoComputadora(puntosJugador);
+    finTurnoJugador(puntosJugador);
   } else if (puntosJugador === 21) {
-    btnPedir.disabled = true;
-    turnoComputadora(puntosJugador);
+    finTurnoJugador(puntosJugador);
     console.warn('Blackjack!');
   }
 });
+
+btnDetener.addEventListener('click', () => {
+  finTurnoJugador(puntosJugador);
+})
 
 crearDeck();
