@@ -5,10 +5,9 @@
  * 2S = Two of Spades (Espadas)
  */
 
-// Mazo de cartas
-let deck = [];
-const tipos = ['C', 'D', 'H', 'S'];
-const especiales = ['A', 'J', 'Q', 'K'];
+let deck = [];  // Mazo de cartas
+const tipos = ['C', 'D', 'H', 'S'];  // Tipos de cartas
+const especiales = ['A', 'J', 'Q', 'K'];  // Valores 'especiales'
 
 
 // Crea y mezcla una nuevo mazo de cartas
@@ -36,4 +35,11 @@ const pedirCarta = () => {
   return deck.pop();
 }
 
-crearDeck();
+const valorCarta = (carta) => {
+  // Quitamos la parte del tipo y dejamos solo el valor de la carta
+  const valor = carta.substring(0, carta.length - 1);
+
+  return (isNaN(valor)) 
+    ? (valor === 'A') ? 11 : 10 
+    : parseInt(valor);
+}
