@@ -8,6 +8,15 @@
 let deck = [];  // Mazo de cartas
 const tipos = ['C', 'D', 'H', 'S'];  // Tipos de cartas
 const especiales = ['A', 'J', 'Q', 'K'];  // Valores 'especiales'
+let puntosJugador = 0;
+let puntosPC = 0;
+
+// Referencias del HTML
+const btnNuevo = document.querySelector('#btnNuevo');
+const btnPedir = document.querySelector('#btnPedir');
+const btnDetener = document.querySelector('#btnDetener');
+const puntosHtml = document.querySelectorAll('small');
+const cartasJugador = document.querySelector('#jugador-cartas');
 
 
 // Crea y mezcla una nuevo mazo de cartas
@@ -23,7 +32,6 @@ const crearDeck = () => {
   }
 
   deck = _.shuffle(deck);
-  console.log(deck);
   return deck;
 }
 
@@ -43,3 +51,28 @@ const valorCarta = (carta) => {
     ? (valor === 'A') ? 11 : 10 
     : parseInt(valor);
 }
+
+
+//* Eventos
+
+btnPedir.addEventListener('click', (e) => {
+  const carta = pedirCarta();
+
+  puntosJugador += valorCarta(carta);
+  puntosHtml[0].innerText = puntosJugador;
+
+  const imgCarta = document.createElement('img');
+  imgCarta.classList.add('carta');
+  imgCarta.src = `assets/cartas/${carta}.png`;
+  imgCarta.alt = `Carta ${carta}`;
+  cartasJugador.appendChild(imgCarta);
+
+  if (puntosJugador > 21) {
+    btnPedir.disabled = true;
+  } else if (puntosJugador === 21) {
+    console.warn('Blackjack!');
+    btnPedir.disabled = true;
+  }
+});
+
+crearDeck();
