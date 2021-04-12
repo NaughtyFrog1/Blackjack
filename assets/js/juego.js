@@ -1,4 +1,4 @@
-(() => {
+const juego = (() => {
   `use strict`;
   
   let deck = [],  // Mazo de cartas
@@ -134,6 +134,5 @@
   });
 
 
-
-  inicializarJuego();
+  return {inicializar: inicializarJuego};
 })();
