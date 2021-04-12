@@ -23,18 +23,19 @@ const cartasPC = document.querySelector('#computadora-cartas');
 
 // Crea y mezcla una nuevo mazo de cartas
 const crearDeck = () => {
+  const tmp = [];
+
   for (const tipo of tipos) {
     for(let i = 2; i <= 10; i++) {
-      deck.push(i + tipo);
+      tmp.push(i + tipo);
     }
 
     for (const especial of especiales) {
-      deck.push(especial + tipo);
+      tmp.push(especial + tipo);
     }
   }
 
-  deck = _.shuffle(deck);
-  return deck;
+  return _.shuffle(tmp);
 }
 
 const pedirCarta = () => {
@@ -68,8 +69,17 @@ const turnoComputadora = (puntosMinimos) => {
     imgCarta.src = `assets/cartas/${carta}.png`;
     imgCarta.alt = `Carta ${carta}`;
     cartasPC.appendChild(imgCarta);
-    console.log(puntosPC);
   } while (puntosPC < puntosMinimos);
+
+  setTimeout(() => {
+    if ((puntosPC > puntosMinimos) && (puntosPC <= 21)) {
+      alert('Gana la computadora');
+    } else if (puntosPC === puntosMinimos) {
+      alert('Empate');
+    } else {
+      alert('Gano el jugador');
+    }
+  }, 150);
 }
 
 const finTurnoJugador = (puntos) => {
@@ -77,6 +87,7 @@ const finTurnoJugador = (puntos) => {
   btnDetener.disabled = true;
   turnoComputadora(puntos);
 }
+
 
 //* Eventos
 
@@ -102,6 +113,22 @@ btnPedir.addEventListener('click', () => {
 
 btnDetener.addEventListener('click', () => {
   finTurnoJugador(puntosJugador);
-})
+});
 
-crearDeck();
+btnNuevo.addEventListener('click', () => {
+  deck = crearDeck();
+
+  btnPedir.disabled = false;
+  btnDetener.disabled = false;
+  puntosJugador = 0;
+  puntosPC = 0;
+
+  cartasJugador.innerText = '';
+  cartasPC.innerText = '';
+
+  puntosHtml[0].innerText = 0;
+  puntosHtml[1].innerText = 0;
+});
+
+
+deck = crearDeck();
