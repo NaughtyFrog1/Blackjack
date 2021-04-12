@@ -34,7 +34,6 @@ html, body {
   border-radius: .32rem;
 }
 
-#jugador-cartas,
-#computadora-cartas {
+.cartas {
   height: 250px;
 }
